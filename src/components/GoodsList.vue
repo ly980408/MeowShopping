@@ -56,7 +56,7 @@ export default {
         }
         .sale{
           font-size: 12px;
-          color: #cdcdcd;
+          color: #c0c0c0;
           padding-top: 2px;
           line-height: normal;
         }

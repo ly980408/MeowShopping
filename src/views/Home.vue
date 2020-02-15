@@ -1,20 +1,24 @@
 <template>
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">Meow Shopping</div></nav-bar>
-    <swiper :bannerList="bannerList" />
-    <recommend-view :recommendList="recommendList" />
-    <single-recommend/>
-    <tab :titles="['流行','新款','精选']" class="home-tab" @tabChange="tabChange" />
-    <goods-list :goodsList="currentGoodsList" />
-
+    <scroll class="scroll-wrapper" ref="scroll">
+      <swiper :bannerList="bannerList" />
+      <recommend-view :recommendList="recommendList" />
+      <single-recommend/>
+      <tab :titles="['流行','新款','精选']" class="home-tab" @tabChange="tabChange" />
+      <goods-list :goodsList="currentGoodsList" />
+    </scroll>
+    <back-top @click.native="backTop" />
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar'
 import Tab from '@/components/Tab'
+import Scroll from '@/components/Scroll'
 
-import GoodsList from '@/components/goods/GoodsList'
+import GoodsList from '@/components/GoodsList'
+import BackTop from '@/components/BackTop'
 
 import Swiper from './home/Swiper'
 import RecommendView from './home/RecommendView'
@@ -25,11 +29,13 @@ import { getHomeMultidata, getHomeGoods } from '@/network/home'
 export default {
   components: {
     NavBar,
+    Scroll,
     Swiper,
     RecommendView,
     SingleRecommend,
     Tab,
-    GoodsList
+    GoodsList,
+    BackTop
   },
   data () {
     return {
@@ -80,6 +86,9 @@ export default {
           this.currentSort = 'sell'
           break
       }
+    },
+    backTop () {
+      this.$refs.scroll.scrollTo(0, 0)
     }
   }
 }
@@ -87,7 +96,7 @@ export default {
 
 <style lang="scss" scoped>
 #home{
-  width: 100%;
+  height: 100vh;
   padding-top: 44px;
   .home-nav{
     background-color: #d4237a;
@@ -99,10 +108,13 @@ export default {
     z-index: 999;
   }
   .home-tab{
-    position: sticky;
-    top: 43px;
-    left: 0;
+    // position: sticky;
+    // top: 43px;
+    // left: 0;
   }
-
+  .scroll-wrapper{
+    height: calc(100% - 50px);
+    overflow: hidden;
+  }
 }
 </style>
