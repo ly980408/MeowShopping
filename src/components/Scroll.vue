@@ -10,6 +10,12 @@
 import BScroll from 'better-scroll'
 
 export default {
+  props: {
+    probeType: {
+      type: Number,
+      default: 0
+    }
+  },
   data () {
     return {
       scroll: null
@@ -17,7 +23,13 @@ export default {
   },
   mounted () {
     this.scroll = new BScroll(this.$refs.wrapper, {
-      click: true
+      click: true,
+      probeType: this.probeType
+    })
+    // 监听滚动
+    this.scroll.on('scroll', position => {
+      // 向父组件传递数据
+      this.$emit('scroll', position)
     })
   },
   methods: {

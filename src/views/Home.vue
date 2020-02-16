@@ -1,14 +1,14 @@
 <template>
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">Meow Shopping</div></nav-bar>
-    <scroll class="scroll-wrapper" ref="scroll">
+    <scroll class="scroll-wrapper" ref="scroll" :probeType="3" @scroll="scroll">
       <swiper :bannerList="bannerList" />
       <recommend-view :recommendList="recommendList" />
       <single-recommend/>
       <tab :titles="['流行','新款','精选']" class="home-tab" @tabChange="tabChange" />
       <goods-list :goodsList="currentGoodsList" />
     </scroll>
-    <back-top @click.native="backTop" />
+    <back-top @click.native="backTop" v-show="isBackTopShow" />
   </div>
 </template>
 
@@ -46,7 +46,8 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      currentSort: 'pop'
+      currentSort: 'pop',
+      isBackTopShow: false
     }
   },
   computed: {
@@ -89,6 +90,9 @@ export default {
     },
     backTop () {
       this.$refs.scroll.scrollTo(0, 0)
+    },
+    scroll (position) {
+      this.isBackTopShow = (-position.y) > 1000
     }
   }
 }
