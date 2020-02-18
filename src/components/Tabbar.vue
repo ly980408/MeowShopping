@@ -24,7 +24,7 @@
         :src="props.active ? cart.active : cart.inactive"
       >
     </van-tabbar-item>
-    <van-tabbar-item to="mine">
+    <van-tabbar-item to="/mine">
       <span>我的</span>
       <img
         slot="icon"

@@ -1,13 +1,20 @@
 <template>
   <div id="home">
     <nav-bar class="home-nav"><div slot="center">Meow Shopping</div></nav-bar>
-    <scroll class="scroll-wrapper" ref="scroll" :probeType="3" @scroll="scroll">
-      <swiper :bannerList="bannerList" />
+    <tab v-show="isTabFixed" :titles="['流行','新款','精选']" class="tab-fixed" @tabChange="tabChange" ref="tab1" />
+    <scroll class="scroll-wrapper"
+            ref="scroll"
+            :probeType="3"
+            :pullUpLoad="true"
+            @scroll="scroll"
+            @pullingUp="loadMore">
+      <swiper :bannerList="bannerList" @swiperImageLoad="getTabOffsetTop" />
       <recommend-view :recommendList="recommendList" />
       <single-recommend/>
-      <tab :titles="['流行','新款','精选']" class="home-tab" @tabChange="tabChange" />
+      <tab :titles="['流行','新款','精选']" class="home-tab" @tabChange="tabChange" ref="tab" />
       <goods-list :goodsList="currentGoodsList" />
     </scroll>
+
     <back-top @click.native="backTop" v-show="isBackTopShow" />
   </div>
 </template>
@@ -47,7 +54,9 @@ export default {
         sell: { page: 0, list: [] }
       },
       currentSort: 'pop',
-      isBackTopShow: false
+      isBackTopShow: false,
+      tabOffsetTop: 0,
+      isTabFixed: false
     }
   },
   computed: {
@@ -65,6 +74,17 @@ export default {
     this.getGoodsData('new')
     this.getGoodsData('sell')
   },
+  mounted () {
+    // 监听图片加载，刷新scroll，重新计算高度
+    this.$bus.$on('imageLoad', () => {
+      const refresh = this.$refs.scroll.refresh
+      this.debounce(refresh, 200)
+    })
+    // 等上方轮播的图片加载完毕后再计算
+  },
+  destroyed () {
+    this.$bus.$off('imageLoad')
+  },
   methods: {
     // 数据请求
     getGoodsData (type) {
@@ -72,6 +92,8 @@ export default {
       getHomeGoods(type, page).then(res => {
         this.goods[type].list.push(...res.data.list)
         this.goods[type].page += 1
+        this.$refs.scroll.scroll.finishPullUp()
+        this.$refs.scroll.scroll.refresh()
       })
     },
     // 事件监听
@@ -87,12 +109,33 @@ export default {
           this.currentSort = 'sell'
           break
       }
+      this.$refs.tab.current = i
+      this.$refs.tab1.current = i
     },
     backTop () {
       this.$refs.scroll.scrollTo(0, 0)
     },
     scroll (position) {
       this.isBackTopShow = (-position.y) > 1000
+
+      this.isTabFixed = (-position.y) >= this.tabOffsetTop
+    },
+    loadMore () {
+      this.getGoodsData(this.currentSort)
+      this.$refs.scroll.scroll.refresh()
+    },
+    getTabOffsetTop () {
+      this.tabOffsetTop = this.$refs.tab.$el.offsetTop
+    },
+    // 防抖函数
+    debounce (func, delay) {
+      let timer = null
+      return function (...args) {
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+          func.apply(this, args)
+        }, delay)
+      }
     }
   }
 }
@@ -101,24 +144,25 @@ export default {
 <style lang="scss" scoped>
 #home{
   height: 100vh;
-  padding-top: 44px;
+  position: relative;
+  // padding-top: 44px;
   .home-nav{
     background-color: #d4237a;
     color: #ffffff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-  }
-  .home-tab{
-    // position: sticky;
-    // top: 43px;
+    // position: fixed;
+    // top: 0;
     // left: 0;
+    // right: 0;
+    // z-index: 999;
+  }
+  .tab-fixed{
+    position: absolute;
+    z-index: 9;
   }
   .scroll-wrapper{
-    height: calc(100% - 50px);
+    height: calc(100% - 94px);
     overflow: hidden;
+    position: relative;
   }
 }
 </style>

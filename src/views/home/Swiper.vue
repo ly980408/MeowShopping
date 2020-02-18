@@ -2,7 +2,7 @@
   <van-swipe :autoplay="3000" indicator-color="#d4237a">
     <van-swipe-item v-for="(item, index) in bannerList" :key="index">
       <a :href="item.link">
-        <img :src="item.image" />
+        <img :src="item.image" @load="imageLoad" />
       </a>
     </van-swipe-item>
   </van-swipe>
@@ -15,6 +15,19 @@ export default {
       type: Array,
       default () {
         return []
+      }
+    }
+  },
+  data () {
+    return {
+      isLoad: false
+    }
+  },
+  methods: {
+    imageLoad () {
+      if (!this.isLoad) {
+        this.$emit('swiperImageLoad')
+        this.isLoad = true
       }
     }
   }

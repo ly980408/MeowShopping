@@ -10,7 +10,6 @@
 <style lang="scss" scoped>
   .single{
     width: 100%;
-    margin-bottom: 5px;
     .title{
       font-weight: bold;
       width: 100%;
@@ -20,6 +19,7 @@
     }
     img{
       width: 100%;
+      vertical-align: middle;
     }
   }
 </style>
