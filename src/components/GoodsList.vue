@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list">
-    <div v-for="(item, index) in goodsList" :key="index" class="goods-item">
+    <div v-for="(item, index) in goodsList" :key="index" class="goods-item" @click="toDetail(item.iid)">
       <img :src="item.show.img" alt="" @load="imageLoad">
       <div class="goods-info">
         <p>{{ item.title }}</p>
@@ -26,6 +26,9 @@ export default {
   methods: {
     imageLoad () {
       this.$bus.$emit('imageLoad')
+    },
+    toDetail (id) {
+      this.$router.push('/detail/' + id)
     }
   }
 }

@@ -80,10 +80,10 @@ export default {
       const refresh = this.$refs.scroll.refresh
       this.debounce(refresh, 200)
     })
-    // 等上方轮播的图片加载完毕后再计算
-  },
-  destroyed () {
     this.$bus.$off('imageLoad')
+  },
+  activated () {
+    this.$refs.scroll.refresh()
   },
   methods: {
     // 数据请求

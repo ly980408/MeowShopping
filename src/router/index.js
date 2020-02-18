@@ -23,6 +23,10 @@ const routes = [
   {
     path: '/mine',
     component: () => import('../views/Mine.vue')
+  },
+  {
+    path: '/detail/:id',
+    component: () => import('../views/Detail.vue')
   }
 ]
 
