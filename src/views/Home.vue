@@ -5,7 +5,7 @@
     <scroll class="scroll-wrapper"
             ref="scroll"
             :probeType="3"
-            :pullUpLoad="true"
+            :pullUpLoad="{threshold: 50}"
             @scroll="scroll"
             @pullingUp="loadMore">
       <swiper :bannerList="bannerList" @swiperImageLoad="getTabOffsetTop" />
@@ -145,15 +145,9 @@ export default {
 #home{
   height: 100vh;
   position: relative;
-  // padding-top: 44px;
   .home-nav{
     background-color: #d4237a;
     color: #ffffff;
-    // position: fixed;
-    // top: 0;
-    // left: 0;
-    // right: 0;
-    // z-index: 999;
   }
   .tab-fixed{
     position: absolute;

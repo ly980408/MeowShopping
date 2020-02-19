@@ -16,7 +16,7 @@ export default {
       default: 0
     },
     pullUpLoad: {
-      type: Boolean,
+      type: [Boolean, Object],
       default: false
     }
   },

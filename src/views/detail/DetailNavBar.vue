@@ -1,6 +1,6 @@
 <template>
   <nav-bar class="nav-bar">
-    <div slot="left" class="back"><span class="iconfont icon-jiantou"></span></div>
+    <div slot="left" class="back"><span class="iconfont icon-jiantou" @click="back"></span></div>
     <div slot="center" class="title">
       <div v-for="(item, index) in titles"
           :key="index"
@@ -23,6 +23,11 @@ export default {
   },
   components: {
     NavBar
+  },
+  methods: {
+    back () {
+      this.$router.back()
+    }
   }
 }
 </script>
@@ -33,7 +38,7 @@ export default {
     box-shadow: 0px 1px #cdcdcd;
     .back{
       font-size: 18px;
-      padding-left: 10px;
+      padding: 0 20px 0 10px;
     }
     .title{
       display: flex;
