@@ -36,6 +36,9 @@ export default {
 #detail{
   .nav-bar{
     box-shadow: 0px 1px #cdcdcd;
+    position: relative;
+    z-index: 9;
+    background-color: #ffffff;
     .back{
       font-size: 18px;
       padding: 0 20px 0 10px;

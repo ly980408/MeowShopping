@@ -47,6 +47,7 @@ export default {
 <style lang="scss">
   .shop-info{
     padding: 25px 15px 0;
+    border-bottom: 4px solid #cdcdcd;
     .info-top{
       display: flex;
       justify-content: flex-start;
