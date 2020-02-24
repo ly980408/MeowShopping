@@ -76,14 +76,16 @@ export default {
   },
   mounted () {
     // 监听图片加载，刷新scroll，重新计算高度
-    this.$bus.$on('imageLoad', () => {
+    this.$bus.$on('homeImageLoad', () => {
       const refresh = this.$refs.scroll.refresh
       this.debounce(refresh, 200)
     })
-    this.$bus.$off('imageLoad')
   },
   activated () {
     this.$refs.scroll.refresh()
+  },
+  deactivated () {
+    this.$bus.$off('homeImageLoad')
   },
   methods: {
     // 数据请求

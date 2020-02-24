@@ -1,12 +1,12 @@
 <template>
   <div class="goods-list">
-    <div v-for="(item, index) in goodsList" :key="index" class="goods-item" @click="toDetail(item.iid)">
-      <img :src="item.show.img" alt="" @load="imageLoad">
+    <div v-for="(item, index) in goodsList" :key="index" class="goods-item" @click="toDetail(item.iid || item.item_id)">
+      <img :src="item.image || item.show.img" alt="" @load="imageLoad">
       <div class="goods-info">
         <p>{{ item.title }}</p>
         <div>
           <span class="price">{{ item.price }}</span>
-          <span class="sale">{{ item.sale }}人付款</span>
+          <span class="sale">{{ item.sale || item.itemSale }}人付款</span>
         </div>
       </div>
     </div>
@@ -25,7 +25,11 @@ export default {
   },
   methods: {
     imageLoad () {
-      this.$bus.$emit('imageLoad')
+      if (this.$route.path.includes('/home')) {
+        this.$bus.$emit('homeImageLoad')
+      } else if (this.$route.path.includes('/detail')) {
+        this.$bus.$emit('detailImageLoad')
+      }
     },
     toDetail (id) {
       this.$router.push('/detail/' + id)

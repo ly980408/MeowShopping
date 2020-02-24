@@ -9,6 +9,12 @@ export function getDetailData (id) {
   })
 }
 
+export function getRecommend () {
+  return request({
+    url: '/recommend'
+  })
+}
+
 // 导出一个类 用于存储商品信息
 export class GoodsInfo {
   constructor (itemInfo, columns, services) {

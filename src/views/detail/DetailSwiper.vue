@@ -1,5 +1,5 @@
 <template>
-  <van-swipe indicator-color="#d4237a">
+  <van-swipe indicator-color="#d4237a" :stop-propagation="false" @change="onChange" ref="swiper">
     <van-swipe-item v-for="(item, index) in imageList" :key="index">
       <img :src="item" @click="imagePreview"/>
     </van-swipe-item>
@@ -16,9 +16,26 @@ export default {
   props: {
     imageList: Array
   },
+  data () {
+    return {
+      index: 0
+    }
+  },
   methods: {
+    onChange (index) {
+      this.index = index
+    },
     imagePreview () {
-      ImagePreview(this.imageList)
+      ImagePreview({
+        images: this.imageList,
+        startPosition: this.index,
+        onChange: (index) => {
+          this.index = index
+        },
+        onClose: () => {
+          this.$refs.swiper.swipeTo(this.index, { immediate: true })
+        }
+      })
     }
   }
 }

@@ -35,7 +35,6 @@ export default {
     }
   },
   watch: {
-    // 计算图片个数
     detailInfo () {
       let result = 0
       for (const item of this.detailInfo.detailImage) {

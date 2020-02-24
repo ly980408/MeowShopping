@@ -12,6 +12,21 @@
         <img :src="commentInfo.user.avatar" class="user-avatar">
         <span class="user-name">{{ commentInfo.user.uname }}</span>
       </div>
+      <div class="content">
+        <div class="text">
+          <p>{{ commentInfo.content }}</p>
+        </div>
+        <div class="explain" v-if="commentInfo.explain">
+          <div class="van-multi-ellipsis--l3">{{ commentInfo.explain }}</div>
+        </div>
+        <div v-if="commentInfo.images" class="image-box">
+          <img v-for="item in commentInfo.images" :key="item" :src="item" class="image">
+        </div>
+      </div>
+      <div class="footer">
+        <span class="time">{{ commentInfo.created | formatDate }}</span>
+        <span class="style">{{ commentInfo.style }}</span>
+      </div>
     </div>
     <div v-else class="no-comment">暂无评论</div>
   </div>
@@ -21,6 +36,15 @@
 export default {
   props: {
     commentInfo: {}
+  },
+  filters: {
+    formatDate (value) {
+      const date = new Date(value * 1000)
+      const y = date.getFullYear()
+      const m = date.getMonth() + 1
+      const d = date.getDay() + 1
+      return y + '/' + m + '/' + d
+    }
   }
 }
 </script>
@@ -43,14 +67,48 @@ export default {
     .container{
       .user{
         display: flex;
-        vertical-align: middle;
         .user-avatar{
-          width: 50px;
-          height: 50px;
+          width: 35px;
+          height: 36px;
           border-radius: 50%;
         }
         .user-name{
           padding-left: 15px;
+          margin: auto 0;
+          color: #333;
+        }
+      }
+      .content{
+        .text{
+          padding: 10px;
+          font-size: 15px;
+          color: #333;
+        }
+        .explain{
+          margin: 10px;
+          padding: 10px;
+          padding-right: 25px;
+          background-color: #f6f6f6;
+          border-radius: 10px;
+          position: relative;
+        }
+        .image-box{
+          padding-left: 15px;
+          .image{
+            width: 85px;
+            height: 85px;
+            margin-right: 15px;
+          }
+        }
+      }
+      .footer{
+        padding: 6px;
+        .time{
+          margin-right: 8px;
+        }
+        .style{
+          font-size: 14px;
+          color:#cdcdcd;
         }
       }
     }
