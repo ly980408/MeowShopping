@@ -73,7 +73,6 @@ export default {
     // 请求数据
     getDetailData(this.id).then(res => {
       const data = res.result
-      console.log(data)
       this.topImages = data.itemInfo.topImages // 顶部轮播图片
       this.goodsInfo = new GoodsInfo(data.itemInfo, data.columns, data.shopInfo.services) // 商品主要信息
       if (data.rate.cRate !== 0) {

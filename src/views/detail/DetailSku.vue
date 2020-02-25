@@ -10,6 +10,9 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import { Toast } from 'vant'
+Vue.use(Toast)
 export default {
   props: {
     skuInfo: {
@@ -50,7 +53,7 @@ export default {
   mounted () {
   },
   watch: {
-    skuInfo () {
+    skuInfo () { // 整合 sku 组件所需要的数据结构
       // 默认价格
       this.sku.price = this.skuInfo.defaultPrice.substring(1)
       // 总库存
@@ -73,6 +76,16 @@ export default {
       }
       tree[0].k_s = 's1'
       tree[1].k_s = 's2'
+      // 添加预览图
+      for (const item of tree[0].v) {
+        const id = item.id
+        const el = this.skuInfo.skus.find((el) => {
+          if (el.styleId === id) return true
+        })
+        // console.log(el)
+        item.imgUrl = el.img
+      }
+
       this.sku.tree = tree
       // list
       const list = []
@@ -93,7 +106,32 @@ export default {
     onBuyClicked (skuData) {
       console.log(skuData)
     },
-    onAddCartClicked () {
+    onAddCartClicked (skuData) {
+      // 信息提取整合
+      const { goodsId, selectedNum: num } = skuData
+      const { id, price, s1, s2 } = skuData.selectedSkuComb
+      // 颜色、尺寸和图片
+      const { name: style, imgUrl } = this.sku.tree[0].v.find((el) => {
+        if (el.id === s1) return true
+      })
+      const { name: size } = this.sku.tree[1].v.find((el) => {
+        if (el.id === s2) return true
+      })
+      // 存入一个对象
+      const data = {
+        goodsId,
+        title: this.skuInfo.title,
+        num,
+        id,
+        price: (price / 100).toFixed(2),
+        style,
+        size,
+        imgUrl
+      }
+      // 将数据存入 store 中
+      this.$store.commit('addCartItem', data)
+      this.show = false
+      Toast('添加成功，在购物车中等亲~')
     }
   }
 }
