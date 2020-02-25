@@ -1,7 +1,7 @@
 <template>
   <div class="goods-list">
     <div v-for="(item, index) in goodsList" :key="index" class="goods-item" @click="toDetail(item.iid || item.item_id)">
-      <img :src="item.image || item.show.img" alt="" @load="imageLoad">
+      <img :src="item.image || item.img || item.show.img" alt="" @load="imageLoad">
       <div class="goods-info">
         <p>{{ item.title }}</p>
         <div>
@@ -29,6 +29,8 @@ export default {
         this.$bus.$emit('homeImageLoad')
       } else if (this.$route.path.includes('/detail')) {
         this.$bus.$emit('detailImageLoad')
+      } else if (this.$route.path.includes('/category')) {
+        this.$bus.$emit('categoryImageLoad')
       }
     },
     toDetail (id) {

@@ -66,6 +66,10 @@ export default {
   },
   created () {
     getHomeMultidata().then(res => {
+      if (!res) {
+        console.log('请求失败')
+        return
+      }
       this.bannerList = res.data.banner.list
       this.recommendList = res.data.recommend.list
     })
@@ -92,6 +96,10 @@ export default {
     getGoodsData (type) {
       const page = this.goods[type].page + 1
       getHomeGoods(type, page).then(res => {
+        if (!res) {
+          console.log('请求失败')
+          return
+        }
         this.goods[type].list.push(...res.data.list)
         this.goods[type].page += 1
         this.$refs.scroll.scroll.finishPullUp()

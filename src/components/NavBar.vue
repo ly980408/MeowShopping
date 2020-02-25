@@ -17,6 +17,8 @@ export default {
     display: flex;
     height: 44px;
     line-height: 44px;
+    position: relative;
+    z-index: 999;
     .left,.right{
       width: 60px;
     }

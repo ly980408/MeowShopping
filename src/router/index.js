@@ -13,8 +13,8 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
-    path: '/sort',
-    component: () => import('../views/Sort.vue')
+    path: '/category',
+    component: () => import('../views/Category.vue')
   },
   {
     path: '/cart',

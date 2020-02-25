@@ -8,7 +8,7 @@
         :src="props.active ? home.active : home.inactive"
       >
     </van-tabbar-item>
-    <van-tabbar-item to="/sort">
+    <van-tabbar-item to="/category">
       <span>分类</span>
       <img
         slot="icon"

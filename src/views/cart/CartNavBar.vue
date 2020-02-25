@@ -1,6 +1,6 @@
 <template>
   <nav-bar class="nav-bar">
-    <div slot="center">购物车({{cartList.length}})</div>
+    <div slot="center">购物车({{cartListLength}})</div>
   </nav-bar>
 </template>
 
@@ -15,8 +15,8 @@ export default {
     NavBar
   },
   computed: {
-    cartList () {
-      return this.$store.state.cartList
+    cartListLength () {
+      return this.$store.state.cartList.length
     }
   }
 }
