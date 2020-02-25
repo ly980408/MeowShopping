@@ -1,7 +1,8 @@
 <template>
   <div class="cart">
     <cart-nav-bar class="cart-nav-bar" />
-    <cart-list :cartList="cartList" />
+    <div v-if="cartList.length===0" class="no-goods">购物车里空空如也~</div>
+    <cart-list v-else :cartList="cartList" />
   </div>
 </template>
 
@@ -34,11 +35,22 @@ export default {
   .cart{
     width: 100%;
     height: 100vh;
+    position: relative;
     // .cart-nav-bar{
     //   position: fixed;
     //   top: 0;
     //   left: 0;
     //   right: 0;
     // }
+    .no-goods {
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      color: #cdcdcd;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%);
+    }
   }
 </style>

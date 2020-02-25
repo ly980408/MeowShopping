@@ -7,6 +7,7 @@ UI库： Vant-UI
 
 未解决bug：
 - 详情页 NavBar 各项对应位置获取问题，当图片加载过慢时会产生错误
+- 底部 tabbar 由于内部封装的是Vant组件，偶尔出现点击问题(问题出现在PC端模拟器)
 
 
 ## Project setup

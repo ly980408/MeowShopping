@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     onSubmit () {
-      console.log('onSubmit')
+      console.log('onSubmit', this.submitList)
     }
   },
   computed: {
