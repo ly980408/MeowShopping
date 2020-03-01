@@ -2,7 +2,7 @@
   <div class="cart">
     <cart-nav-bar class="cart-nav-bar" />
     <div v-if="cartList.length===0" class="no-goods">购物车里空空如也~</div>
-    <cart-list v-else :cartList="cartList" />
+    <cart-list :cartList="cartList" />
   </div>
 </template>
 

@@ -5,30 +5,43 @@
 
 UI库： Vant-UI
 
-未解决bug：
-- 详情页 NavBar 各项对应位置获取问题，当图片加载过慢时会产生错误
-- 底部 tabbar 由于内部封装的是Vant组件，偶尔出现点击问题(问题出现在PC端模拟器)
+## 项目演示
 
+[Meow Shopping](http://ilovemeow.shop/)
 
-## Project setup
-```
-npm install
-```
+## 项目截图
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### 首页
 
-### Compiles and minifies for production
-```
-npm run build
-```
+![首页1](README/%E9%A6%96%E9%A1%B51.jpg)
 
-### Lints and fixes files
-```
-npm run lint
-```
+![首页tab](README/%E9%A6%96%E9%A1%B5tab.jpg)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![首页tab2](README/%E9%A6%96%E9%A1%B5tab2.jpg)
+
+### 详情
+
+![详情](README/%E8%AF%A6%E6%83%85.jpg)
+
+![详情tab1](README/%E8%AF%A6%E6%83%85tab1.jpg)
+
+![详情tab2](README/%E8%AF%A6%E6%83%85tab2.jpg)
+
+![详情tab3](README/%E8%AF%A6%E6%83%85tab3.jpg)
+
+![详情sku](README/%E8%AF%A6%E6%83%85sku.jpg)
+
+### 分类
+
+![分类](README/%E5%88%86%E7%B1%BB.jpg)
+
+![分类2](README/%E5%88%86%E7%B1%BB2.jpg)
+
+### 购物车
+
+![购物车](README/%E8%B4%AD%E7%89%A9%E8%BD%A6.jpg)
+
+![购物车2](README/%E8%B4%AD%E7%89%A9%E8%BD%A62.jpg)
+
+![购物车3](README/%E8%B4%AD%E7%89%A9%E8%BD%A63.jpg)
+

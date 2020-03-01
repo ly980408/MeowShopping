@@ -65,6 +65,5 @@ export default {
 <style lang="scss" scoped>
   .van-tabbar{
     background-color: #f6f6f6;
-    z-index: 999;
   }
 </style>
